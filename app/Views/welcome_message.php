@@ -209,6 +209,9 @@
 			</li>
 			<li class="menu-item hidden"><a href="#">Home</a></li>
 			<?php if ($auth->loggedIn()): ?>
+				<?php if ($auth->isAdmin()): ?>
+					<li class="menu-item hidden"><a href="<?php echo site_url('admin/dashboard') ?>">Dashboard</a></li>
+				<?php endif; ?>
 				<li class="menu-item hidden"><a href="<?php echo site_url('auth/logout') ?>">Logout ( <?php echo $currentUser->first_name ?> )</a></li>
 			<?php else: ?>
 				<li class="menu-item hidden"><a href="<?php echo site_url('auth/create_user') ?>">Register</a></li>

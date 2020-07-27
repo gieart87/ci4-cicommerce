@@ -26,11 +26,12 @@ class BaseController extends Controller
 	 *
 	 * @var array
 	 */
-	protected $helpers = [];
+	protected $helpers = ['form'];
 
 	protected $currentUser = null;
 	protected $auth = null;
 	protected $data = [];
+	protected $session = null;
 
 	/**
 	 * Constructor.
@@ -44,7 +45,8 @@ class BaseController extends Controller
 		// Preload any models, libraries, etc, here.
 		//--------------------------------------------------------------------
 		// E.g.:
-		// $this->session = \Config\Services::session();
+		$this->session = \Config\Services::session();
+		$this->data['session'] = $this->session;
 
 		$this->auth = new \IonAuth\Libraries\IonAuth();
 		$this->currentUser = $this->auth->user()->row();

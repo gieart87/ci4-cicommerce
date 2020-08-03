@@ -33,20 +33,20 @@
 	<div class="wrapper">
 
 		<!-- header -->
-		<?php echo view('admin/shared/header'); ?>
+		<?php echo $this->include('admin/shared/header'); ?>
 
 		<!-- sidebar -->
-		<?php echo view('admin/shared/sidebar'); ?>
+		<?php echo $this->include('admin/shared/sidebar'); ?>
 
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
 			<!-- content -->
-			<?php echo view($content); ?>
+			<?php echo $this->renderSection('content'); ?>
 		</div>
 		<!-- /.content-wrapper -->
 		
 		<!-- Footer -->
-		<?php echo view('admin/shared/footer'); ?>
+		<?php echo $this->include('admin/shared/footer'); ?>
 
 		<!-- Control Sidebar -->
 		<aside class="control-sidebar control-sidebar-dark">

@@ -28,7 +28,7 @@ class Categories extends BaseController
 
         $this->getCategories();
 
-        return $this->renderView('admin/categories/index', $this->data);
+        return view('admin/categories/index', $this->data);
     }
 
     private function getCategories()
@@ -50,7 +50,7 @@ class Categories extends BaseController
         } else {
             $this->getCategories();
             $this->data['errors'] = $this->categoryModel->errors();
-            return $this->renderView('admin/categories/index', $this->data);
+            return view('admin/categories/index', $this->data);
         }
     }
 
@@ -68,7 +68,7 @@ class Categories extends BaseController
 		} else {
 			$this->getCategories();
 			$this->data['errors'] = $this->categoryModel->errors();
-			return $this->renderView('admin/categories/index', $this->data);
+			return view('admin/categories/index', $this->data);
 		}
     }
 

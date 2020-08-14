@@ -209,7 +209,7 @@
 			</li>
 			<li class="menu-item hidden"><a href="#">Home</a></li>
 			<?php if ($auth->loggedIn()): ?>
-				<?php if ($auth->isAdmin()): ?>
+				<?php if ($auth->inGroup(['admin', 'operator'], $currentUser->id)): ?>
 					<li class="menu-item hidden"><a href="<?php echo site_url('admin/dashboard') ?>">Dashboard</a></li>
 				<?php endif; ?>
 				<li class="menu-item hidden"><a href="<?php echo site_url('auth/logout') ?>">Logout ( <?php echo $currentUser->first_name ?> )</a></li>
@@ -233,6 +233,18 @@
 <!-- CONTENT -->
 
 <section>
+
+<?php if (!empty($session->getFlashdata('success'))): ?>
+	<div class="alert alert-success">
+		<?= $session->getFlashdata('success') ?>
+	</div>
+<?php endif; ?>
+
+<?php if (!empty($session->getFlashdata('errors'))): ?>
+	<div class="alert alert-danger">
+		<?= $session->getFlashdata('errors') ?>
+	</div>
+<?php endif; ?>
 
 	<h1>About this page</h1>
 

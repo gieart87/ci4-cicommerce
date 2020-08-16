@@ -27,6 +27,7 @@ class Categories extends BaseController
         }
 
         $this->getCategories();
+        $this->getParentOptions($categoryId);
 
         return view('admin/categories/index', $this->data);
     }
@@ -37,18 +38,26 @@ class Categories extends BaseController
         $this->data['pager'] = $this->categoryModel->pager;
     }
 
+    private function getParentOptions($exceptCategoryId = null)
+    {
+        $this->data['parentOptions'] = $this->categoryModel->getParentOptions($exceptCategoryId);
+    }
+
     public function store()
     {
         $params = [
             'name' => $this->request->getVar('name'),
+            'parent_id' => $this->request->getVar('parent_id'),
         ];
-        $params['slug'] = strtolower(url_title($params['name']));
+
+        $this->data['selectedParentId'] = $params['parent_id'];
 
         if ($this->categoryModel->save($params)) {
             $this->session->setFlashdata('success', 'Category has been saved.');
             return redirect()->to('/admin/categories');
         } else {
             $this->getCategories();
+            $this->getParentOptions();
             $this->data['errors'] = $this->categoryModel->errors();
             return view('admin/categories/index', $this->data);
         }
@@ -58,9 +67,11 @@ class Categories extends BaseController
     {
         $params = [
 			'id' => $id,
-			'name' => $this->request->getVar('name'),
-		];
-		$params['slug'] = strtolower(url_title($params['name']));
+            'name' => $this->request->getVar('name'),
+            'parent_id' => $this->request->getVar('parent_id'),
+        ];
+        
+        $this->data['selectedParentId'] = $params['parent_id'];
 
 		if ($this->categoryModel->save($params)) {
 			$this->session->setFlashdata('success', 'Category has been updated!');

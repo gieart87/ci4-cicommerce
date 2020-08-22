@@ -19,6 +19,9 @@ class Attributes extends BaseController
         $this->data['validations'] = $this->attributeModel::VALIDATIONS;
         $this->data['isConfigurableOptions'] = $this->attributeModel::IS_CONFIGURABLE_OPTIONS;
         $this->data['isFilterableOptions'] = $this->attributeModel::IS_FILTERABLE_OPTIONS;
+
+        $this->data['currentAdminMenu'] = 'catalogue';
+        $this->data['currentAdminSubMenu'] = 'attribute';
     }
 
     public function index($attributeId = null)

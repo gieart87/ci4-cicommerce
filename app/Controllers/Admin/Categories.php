@@ -12,6 +12,9 @@ class Categories extends BaseController
     public function __construct()
     {
         $this->categoryModel = new CategoryModel();
+
+        $this->data['currentAdminMenu'] = 'catalogue';
+        $this->data['currentAdminSubMenu'] = 'category';
     }
 
     public function index($categoryId = null)

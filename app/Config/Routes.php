@@ -46,6 +46,12 @@ $routes->group('admin', ['filter' => 'admin-auth:admin,operator'] ,function ($ro
 	$routes->post('attributes', 'Admin\Attributes::store');
 	$routes->put('attributes/(:num)', 'Admin\Attributes::update/$1');
 	$routes->delete('attributes/(:num)', 'Admin\Attributes::destroy/$1');
+
+	$routes->get('brands', 'Admin\Brands::index');
+	$routes->get('brands/(:num)', 'Admin\Brands::index/$1');
+	$routes->post('brands', 'Admin\Brands::store');
+	$routes->put('brands/(:num)', 'Admin\Brands::update/$1');
+	$routes->delete('brands/(:num)', 'Admin\Brands::destroy/$1');
 });
 
 /**

@@ -52,6 +52,12 @@
 								<p>Attributes</p>
 							</a>
 						</li>
+						<li class="nav-item">
+							<a href="<?= site_url('admin/brands') ?>" class="nav-link <?= ($currentAdminSubMenu == 'brand') ? 'active' : '' ?>"">
+								<i class="far fa-circle nav-icon"></i>
+								<p>Brands</p>
+							</a>
+						</li>
 					</ul>
 				</li>
 				<li class="nav-item has-treeview <?= ($currentAdminMenu == 'order') ? 'menu-open' : '' ?>">

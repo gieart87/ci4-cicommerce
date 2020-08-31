@@ -11,7 +11,7 @@ class AttributeModel extends Model
 
 	protected $allowedFields = ['code', 'name', 'type', 'validation', 'is_required', 'is_unique', 'is_filterable', 'is_configurable'];
 
-	protected $useTimestamps = false;
+	protected $useTimestamps = true;
 	protected $createdField  = 'created_at';
 	protected $updatedField  = 'updated_at';
 

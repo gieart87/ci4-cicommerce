@@ -32,6 +32,7 @@ class BaseController extends Controller
 	protected $auth = null;
 	protected $data = [];
 	protected $session = null;
+	protected $db;
 
 	/**
 	 * Constructor.
@@ -53,5 +54,7 @@ class BaseController extends Controller
 		
 		$this->data['auth'] = $this->auth;
 		$this->data['currentUser'] = $this->currentUser;
+
+		$this->db = \Config\Database::connect();
 	}
 }

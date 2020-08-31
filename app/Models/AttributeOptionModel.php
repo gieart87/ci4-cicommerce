@@ -11,7 +11,7 @@ class AttributeOptionModel extends Model
 
 	protected $allowedFields = ['attribute_id','name', 'slug'];
 
-	protected $useTimestamps = false;
+	protected $useTimestamps = true;
 	protected $createdField  = 'created_at';
 	protected $updatedField  = 'updated_at';
 

@@ -95,21 +95,42 @@
 			return confirm("Do you want to remove this?");
 		});
 
+		function showSimpleProductAttributes() {
+			$('#productStatus').prop("required", true);
+			$('#productPrice').prop("required", true);
+			$('#productStock').prop("required", true);
+			$('#productWeight').prop("required", true);
+			$(".simple-attributes").show();
+		}
+
+		function hideSimpleProductAttributes() {
+			$('#productStatus').prop("required", false);
+			$('#productPrice').prop("required", false);
+			$('#productStock').prop("required", false);
+			$('#productWeight').prop("required", false);
+			$(".simple-attributes").hide();
+		}
+
+		function hideConfigurableAttributes() {
+			$(".configurable-attributes").hide();
+		}
+
+		function showConfigurableAttributes() {
+			$(".configurable-attributes").show();
+		}
+
 		function showHideProductAttributes() {
 			var productType = $(".product-type").val();
 				
 			if (productType == 'simple') {
-				$('#productStatus').prop("required", true);
-				$('#productPrice').prop("required", true);
-				$('#productStock').prop("required", true);
-				$('#productWeight').prop("required", true);
-				$(".simple-attributes").show();
+				showSimpleProductAttributes();
+				hideConfigurableAttributes();
+			} else if (productType == 'configurable'){
+				showConfigurableAttributes();
+				hideSimpleProductAttributes();
 			} else {
-				$('#productStatus').prop("required", false);
-				$('#productPrice').prop("required", false);
-				$('#productStock').prop("required", false);
-				$('#productWeight').prop("required", false);
-				$(".simple-attributes").hide();
+				hideSimpleProductAttributes();
+				hideConfigurableAttributes();
 			}
 		}
 

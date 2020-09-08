@@ -5,12 +5,14 @@ use App\Controllers\BaseController;
 use App\Models\ProductModel;
 use App\Models\CategoryModel;
 use App\Models\BrandModel;
+use App\Models\AttributeModel;
 
 class Products extends BaseController
 {
     protected $productModel;
     protected $categoryModel;
     protected $brandModel;
+    protected $attributeModel;
 
     protected $perPage = 10;
 
@@ -19,6 +21,7 @@ class Products extends BaseController
         $this->productModel = new ProductModel();
         $this->categoryModel = new CategoryModel();
         $this->brandModel = new BrandModel();
+        $this->attributeModel = new AttributeModel();
 
         $this->data['currentAdminMenu'] = 'catalogue';
         $this->data['currentAdminSubMenu'] = 'product';
@@ -73,7 +76,17 @@ class Products extends BaseController
 
     public function create()
     {
+        $this->data['configurableAttributes'] = $this->getConfigurableAttributes();
         return view('admin/products/create', $this->data);
+    }
+
+    private function getConfigurableAttributes()
+    {
+        $configurableAttributes = $this->attributeModel
+            ->where('is_configurable', true)
+            ->findAll();
+
+        return $configurableAttributes;
     }
 
     public function store()

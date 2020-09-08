@@ -74,6 +74,9 @@
 						<div class="simple-attributes">
 							<?= $this->include('admin/products/simple_product_fields') ?>
 						</div>
+						<div class="configurable-attributes">
+							<?= $this->include('admin/products/configurable_attributes') ?>
+						</div>
 					</div>
 					<!-- /.card-body -->
 

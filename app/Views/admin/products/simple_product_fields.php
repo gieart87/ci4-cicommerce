@@ -38,15 +38,3 @@
 		</div>
 	</div>
 </div>
-<div class="form-group">
-	<label for="productShortDescription">Short Description</label>
-	<?= form_textarea('short_description', set_value('short_description', isset($product->short_description) ? ($product->short_description) : '' ), ['class' => 'form-control', 'id' => 'productShortDescription']) ?>
-</div>
-<div class="form-group">
-	<label for="productDescription">Description</label>
-	<?= form_textarea('description', set_value('description', isset($product->description) ? ($product->description) : '' ), ['class' => 'form-control', 'id' => 'productDescription']) ?>
-</div>
-<div class="form-group">
-	<label for="productStatus">Status</label>
-	<?= form_dropdown('status', $statuses, set_value('status', isset($product->status) ? ($product->status) : '' ), ['class' => 'form-control', 'id' => 'productStatus']) ?>
-</div>

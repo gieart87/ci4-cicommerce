@@ -56,13 +56,16 @@
 								<tr>
 									<td><?= $product->sku ?></td>
 									<td></td>
-									<td><?= $product->name ?></td>
+									<td>
+									<?= $product->name ?><br/>
+									<span style="font-size:12px"><?= $product->type ?></span>
+									</td>
 									<td><?= $product->price ?></td>
 									<td><?= $product->qty ?></td>
 									<td><?= $statuses[$product->status] ?></td>
 									<td>
-										<a href="<?= site_url('admin/products/'. $product->id) ?>" class="badge bg-info">edit</a>
-										<form method="POST" action="<?= site_url('admin/brands/'. $product->id) ?>" accept-charset="UTF-8" class="delete" style="display:inline-block">
+										<a href="<?= site_url('admin/products/'. $product->id .'/edit') ?>" class="badge bg-info">edit</a>
+										<form method="POST" action="<?= site_url('admin/products/'. $product->id) ?>" accept-charset="UTF-8" class="delete" style="display:inline-block">
 											<input name="_method" type="hidden" value="DELETE">
 											<button class="badge bg-danger" style="border:none !important">delete</button>
 										</form>

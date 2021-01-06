@@ -23,15 +23,18 @@
 	<div class="container-fluid">
 		<!-- /.row -->
 		<div class="row">
-			<div class="col-3">
-				<div class="card">
-					<div class="card-header">
-						<h3 class="card-title">Menu</h3>
-					</div>
-					<div class="card-body">
+			<?php if (!empty($product)) : ?>
+				<div class="col-3">
+					<div class="card">
+						<div class="card-header">
+							<h3 class="card-title">Menu</h3>
+						</div>
+						<div class="card-body">
+							<?= $this->include('admin/products/menus'); ?>
+						</div>
 					</div>
 				</div>
-			</div>
+			<?php endif; ?>
 		  	<div class="col-9">
 			  <div class="card">
 				<div class="card-header">

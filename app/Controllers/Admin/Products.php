@@ -9,6 +9,7 @@ use App\Models\AttributeModel;
 use App\Models\AttributeOptionModel;
 use App\Models\ProductAttributeValueModel;
 use App\Models\ProductInventoryModel;
+use App\Models\ProductImageModel;
 
 class Products extends BaseController
 {
@@ -19,6 +20,7 @@ class Products extends BaseController
     protected $attributeOptionModel;
     protected $productAttributeValueModel;
     protected $productInventoryModel;
+    protected $productImageModel;
 
     protected $perPage = 10;
 
@@ -31,6 +33,7 @@ class Products extends BaseController
         $this->attributeOptionModel = new AttributeOptionModel();
         $this->productAttributeValueModel = new ProductAttributeValueModel();
         $this->productInventoryModel = new ProductInventoryModel();
+        $this->productImageModel = new ProductImageModel();
 
         $this->data['currentAdminMenu'] = 'catalogue';
         $this->data['currentAdminSubMenu'] = 'product';
@@ -110,6 +113,7 @@ class Products extends BaseController
         $this->data['product'] = $product;
         $this->data['configurableAttributes'] = $this->getConfigurableAttributes();
         $this->data['categoryIds'] = array_column($product->categories, 'id');
+        $this->data['productMenu'] = 'product_details';
 
         return view('admin/products/form', $this->data);
     }
@@ -248,6 +252,95 @@ class Products extends BaseController
             $this->session->setFlashdata('success', 'Product has been saved.');
             return redirect()->to('/admin/products');
         }
+    }
+
+    public function images($id)
+    {
+        $product = $this->productModel->find($id);
+
+        if (!$product) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+        
+        if ($product->parent_id) {
+            return redirect()->to('/admin/products/'. $product->parent_id .'/images');
+        }
+
+        $this->data['product'] = $product;
+        $this->data['productImages'] = $this->productImageModel
+            ->where('product_id', $product->id)
+            ->orderBy('created_at', 'desc')
+            ->findAll();
+
+        $this->data['productMenu'] = 'product_images';
+
+        return view('admin/products/images', $this->data);
+    }
+
+    public function uploadImage($productId)
+    {
+        $product = $this->productModel->find($productId);
+
+        if (!$product) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
+        $this->data['product'] = $product;
+        $this->data['productMenu'] = 'product_images';
+
+        return view('admin/products/image_upload', $this->data);
+    }
+
+    public function doUploadImage($productId)
+    {
+        $product = $this->productModel->find($productId);
+
+        if (!$product) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
+        $image = $this->request->getFile('image');
+        $fileName = $image->getRandomName();
+
+        $path = $image->store('products/', $fileName);
+
+        if ($path) {
+            $images = $this->generateImages($path, $fileName);
+
+            $params = array_merge($images, [
+                'product_id' => $productId,
+                'original' => $path,
+            ]);
+
+            $this->productImageModel->save($params);
+
+            $this->session->setFlashdata('success', 'Image has been saved.');
+            return redirect()->to('/admin/products/' . $productId . '/images');
+        }
+
+        $this->session->setFlashdata('error', 'Image upload failed.');
+        return redirect()->to('/admin/products/' . $productId . '/images');
+    }
+
+    private function generateImages($originalPath, $fileName)
+    {
+        $imageLib = \Config\Services::image();
+        $uploadDir = WRITEPATH. 'uploads/';
+
+        list($name, $extension) = explode('.', $fileName);
+        
+        $images = [];
+        foreach ($this->productImageModel::IMAGE_SIZES as $size => $sizeDetails) {
+            $imagePath = 'products/' . $name . '_' . $size . '.' . $extension;
+            
+            $imageLib->withFile($uploadDir . $originalPath)
+                ->fit($sizeDetails['width'], $sizeDetails['height'], 'center')
+                ->save($uploadDir . $imagePath);
+
+            $images[$size] = $imagePath;
+        }
+
+        return $images;
     }
 
     private function updateProductVariants($params)

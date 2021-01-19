@@ -25,11 +25,14 @@ class ProductModel extends Model
 		'height',
 		'short_description',
 		'description',
+		'deleted_at',
 	];
 
 	protected $useTimestamps = true;
+	protected $useSoftDeletes = true;
 	protected $createdField  = 'created_at';
 	protected $updatedField  = 'updated_at';
+	protected $deletedField  = 'deleted_at';
 
 	protected $validationRules    = [
 		'type' => 'required',

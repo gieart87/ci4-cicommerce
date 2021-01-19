@@ -23,7 +23,7 @@
 			<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 				<!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
 				<li class="nav-item">
-					<a href="<?= site_url('admin/dashboard') ?>" class="nav-link <?= ($currentAdminSubMenu == 'dashboard') ? 'active' : '' ?>"">
+					<a href="<?= site_url('admin/dashboard') ?>" class="nav-link <?= ($currentAdminSubMenu == 'dashboard') ? 'active' : '' ?>">
 						<i class="nav-icon fas fa-tachometer-alt"></i>
 						<p>Dashboard</p>
 					</a>
@@ -35,9 +35,15 @@
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="<?= site_url('admin/products') ?>" class="nav-link <?= ($currentAdminSubMenu == 'product') ? 'active' : '' ?>"">
+							<a href="<?= site_url('admin/products') ?>" class="nav-link <?= ($currentAdminSubMenu == 'product') ? 'active' : '' ?>">
 								<i class="far fa-circle nav-icon"></i>
 								<p>Products</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="<?= site_url('admin/products/trashed') ?>" class="nav-link <?= ($currentAdminSubMenu == 'deleted-product') ? 'active' : '' ?>">
+								<i class="far fa-circle nav-icon"></i>
+								<p>Deleted Products</p>
 							</a>
 						</li>
 						<li class="nav-item">
@@ -47,13 +53,13 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="<?= site_url('admin/attributes') ?>" class="nav-link <?= ($currentAdminSubMenu == 'attribute') ? 'active' : '' ?>"">
+							<a href="<?= site_url('admin/attributes') ?>" class="nav-link <?= ($currentAdminSubMenu == 'attribute') ? 'active' : '' ?>">
 								<i class="far fa-circle nav-icon"></i>
 								<p>Attributes</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="<?= site_url('admin/brands') ?>" class="nav-link <?= ($currentAdminSubMenu == 'brand') ? 'active' : '' ?>"">
+							<a href="<?= site_url('admin/brands') ?>" class="nav-link <?= ($currentAdminSubMenu == 'brand') ? 'active' : '' ?>">
 								<i class="far fa-circle nav-icon"></i>
 								<p>Brands</p>
 							</a>
@@ -67,19 +73,19 @@
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="<?= site_url('admin/orders') ?>" class="nav-link  <?= ($currentAdminSubMenu == 'order') ? 'active' : '' ?>"">
+							<a href="<?= site_url('admin/orders') ?>" class="nav-link  <?= ($currentAdminSubMenu == 'order') ? 'active' : '' ?>">
 								<i class="far fa-circle nav-icon"></i>
 								<p>Orders</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="<?= site_url('admin/orders/trashed') ?>" class="nav-link <?= ($currentAdminSubMenu == 'trashed-order') ? 'active' : '' ?>"">
+							<a href="<?= site_url('admin/orders/trashed') ?>" class="nav-link <?= ($currentAdminSubMenu == 'trashed-order') ? 'active' : '' ?>">
 								<i class="far fa-circle nav-icon"></i>
 								<p>Trashed</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="<?= site_url('admin/shipments') ?>" class="nav-link <?= ($currentAdminSubMenu == 'shipment') ? 'active' : '' ?>"">
+							<a href="<?= site_url('admin/shipments') ?>" class="nav-link <?= ($currentAdminSubMenu == 'shipment') ? 'active' : '' ?>">
 								<i class="far fa-circle nav-icon"></i>
 								<p>Shipments</p>
 							</a>
@@ -93,25 +99,25 @@
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="<?= site_url('admin/reports/revenues') ?>" class="nav-link <?= ($currentAdminSubMenu == 'report-revenue') ? 'active' : '' ?>"">
+							<a href="<?= site_url('admin/reports/revenues') ?>" class="nav-link <?= ($currentAdminSubMenu == 'report-revenue') ? 'active' : '' ?>">
 								<i class="far fa-circle nav-icon"></i>
 								<p>Revenues</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="<?= site_url('admin/reports/products') ?>" class="nav-link <?= ($currentAdminSubMenu == 'report-product') ? 'active' : '' ?>"">
+							<a href="<?= site_url('admin/reports/products') ?>" class="nav-link <?= ($currentAdminSubMenu == 'report-product') ? 'active' : '' ?>">
 								<i class="far fa-circle nav-icon"></i>
 								<p>Products</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="<?= site_url('admin/reports/inventories') ?>" class="nav-link <?= ($currentAdminSubMenu == 'report-inventory') ? 'active' : '' ?>"">
+							<a href="<?= site_url('admin/reports/inventories') ?>" class="nav-link <?= ($currentAdminSubMenu == 'report-inventory') ? 'active' : '' ?>">
 								<i class="far fa-circle nav-icon"></i>
 								<p>Inventories</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="<?= site_url('admin/reports/payments') ?>" class="nav-link <?= ($currentAdminSubMenu == 'report-payment') ? 'active' : '' ?>"">
+							<a href="<?= site_url('admin/reports/payments') ?>" class="nav-link <?= ($currentAdminSubMenu == 'report-payment') ? 'active' : '' ?>">
 								<i class="far fa-circle nav-icon"></i>
 								<p>Payments</p>
 							</a>
@@ -125,13 +131,13 @@
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="<?= site_url('admin/users') ?>" class="nav-link <?= ($currentAdminSubMenu == 'user') ? 'active' : '' ?>"">
+							<a href="<?= site_url('admin/users') ?>" class="nav-link <?= ($currentAdminSubMenu == 'user') ? 'active' : '' ?>">
 								<i class="far fa-circle nav-icon"></i>
 								<p>Users</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="<?= site_url('admin/roles') ?>" class="nav-link <?= ($currentAdminSubMenu == 'role') ? 'active' : '' ?>"">
+							<a href="<?= site_url('admin/roles') ?>" class="nav-link <?= ($currentAdminSubMenu == 'role') ? 'active' : '' ?>">
 								<i class="far fa-circle nav-icon"></i>
 								<p>Roles</p>
 							</a>

@@ -38,6 +38,7 @@
 			  </div>
 			  <!-- /.card-header -->
 			  	<div class="card-body table-responsive p-0">
+				  	<?= view('admin/shared/flash_message') ?>
 					<table class="table table-hover text-nowrap">
 					<thead>
 						<tr>
@@ -64,11 +65,19 @@
 									<td><?= $product->qty ?></td>
 									<td><?= $statuses[$product->status] ?></td>
 									<td>
-										<a href="<?= site_url('admin/products/'. $product->id .'/edit') ?>" class="badge bg-info">edit</a>
-										<form method="POST" action="<?= site_url('admin/products/'. $product->id) ?>" accept-charset="UTF-8" class="delete" style="display:inline-block">
-											<input name="_method" type="hidden" value="DELETE">
-											<button class="badge bg-danger" style="border:none !important">delete</button>
-										</form>
+										<?php if (empty($product->deleted_at)): ?>
+											<a href="<?= site_url('admin/products/'. $product->id .'/edit') ?>" class="badge bg-info">edit</a>
+											<form method="POST" action="<?= site_url('admin/products/'. $product->id) ?>" accept-charset="UTF-8" class="delete" style="display:inline-block">
+												<input name="_method" type="hidden" value="DELETE">
+												<button class="badge bg-danger" style="border:none !important">delete</button>
+											</form>
+										<?php else: ?>
+											<a href="<?= site_url('admin/products/restore/'. $product->id) ?>" class="badge bg-warning">restore</a>
+											<form method="POST" action="<?= site_url('admin/products/'. $product->id) ?>" accept-charset="UTF-8" class="delete" style="display:inline-block">
+												<input name="_method" type="hidden" value="DELETE">
+												<button class="badge bg-danger" style="border:none !important">delete permanently</button>
+											</form>
+										<?php endif; ?>
 									</td>
 								</tr>
 							<?php endforeach; ?>

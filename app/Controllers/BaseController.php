@@ -55,6 +55,8 @@ class BaseController extends Controller
 		$this->data['auth'] = $this->auth;
 		$this->data['currentUser'] = $this->currentUser;
 
+		$this->data['currentTheme'] = 'indomarket';
+
 		$this->db = \Config\Database::connect();
 	}
 }

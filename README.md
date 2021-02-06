@@ -3,7 +3,7 @@
 ## Installation instructions
 
 ```
-git clone https://github.com/GuxMartin/ci4-cicommerce.git
+git clone https://github.com/gieart87/ci4-cicommerce.git
 cd ci4-cicommerce/
 composer install
 cp env .env

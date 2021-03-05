@@ -20,4 +20,9 @@ class ProductImage extends Entity
     {
         return base_url() . '/uploads/' . $this->attributes['large'];
     }
+
+    public function getOriginal()
+    {
+        return base_url() . '/uploads/' . $this->attributes['original'];
+    }
 }

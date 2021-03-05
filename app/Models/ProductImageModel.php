@@ -34,12 +34,12 @@ class ProductImageModel extends Model
 			'height' => 1024,
 		],
 		'medium' => [
-			'width' => 300,
-			'height' => 600,
+			'width' => 275,
+			'height' => 400,
 		],
 		'small' => [
-			'width' => 200,
-			'height' => 200,
+			'width' => 80,
+			'height' => 80,
 		],
 	];
 }

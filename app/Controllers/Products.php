@@ -11,7 +11,7 @@ class Products extends BaseController
     protected $categoryModel;
     protected $brandModel;
     protected $productImageModel;
-    protected $perPage = 3;
+    protected $perPage = 12;
 
     public function __construct()
     {

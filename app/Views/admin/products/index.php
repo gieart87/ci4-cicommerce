@@ -56,10 +56,10 @@
 							<?php foreach ($products as $product): ?>
 								<tr>
 									<td><?= $product->sku ?></td>
-									<td></td>
+									<td><?= !empty($product->featured_image) ? '<img src="'. $product->featured_image->small. '">' : null ?></td>
 									<td>
-									<?= $product->name ?><br/>
-									<span style="font-size:12px"><?= $product->type ?></span>
+										<?= $product->name ?><br/>
+										<span style="font-size:12px"><?= $product->type ?></span>
 									</td>
 									<td><?= $product->price ?></td>
 									<td><?= $product->qty ?></td>

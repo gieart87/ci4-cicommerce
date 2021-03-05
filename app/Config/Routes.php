@@ -32,6 +32,8 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
+$routes->get('products', 'Products::index');
+
 $routes->group('admin', ['filter' => 'admin-auth:admin,operator'] ,function ($routes) {
 	$routes->get('dashboard', 'Admin\Dashboard::index');
 

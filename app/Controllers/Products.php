@@ -29,9 +29,21 @@ class Products extends BaseController
     public function index()
     {
         $products = $this->productModel
-            ->select('products.*')
+            ->select('products.*, categories.name as categoryName, categories.slug as categorySlug, brands.name as brandName, brands.slug as brandSlug')
+            ->join('product_categories', 'products.id = product_categories.product_id', 'left')
+            ->join('categories', 'product_categories.category_id = categories.id', 'left')
+            ->join('brands', 'products.brand_id = brands.id', 'left')
             ->where('status', $this->productModel::ACTIVE)
             ->where('products.parent_id IS NULL');
+        
+        if ($categorySlug = $this->request->getGet('category')) {
+            $products = $products->where('categories.slug', $categorySlug);
+        }
+
+        if ($brandSlug = $this->request->getGet('brand')) {
+            $products = $products->where('brands.slug', $brandSlug);
+        }
+
         $this->data['products'] = $products->paginate($this->perPage, 'bootstrap');
         $this->data['pager'] = $this->productModel->pager;
 

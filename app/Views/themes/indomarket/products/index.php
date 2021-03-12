@@ -5,58 +5,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-4 col-12">
-                    <div class="sidebar">
-                        <div class="sidebar-widget">
-                            <div class="widget-title">
-                                <h3>Shop by Price</h3>
-                            </div>
-                            <div class="widget-content shop-by-price">
-                                <form method="GET" action="/tesas">
-                                    <div class="price-filter">
-                                        <div class="price-filter-inner">
-                                            <div id="slider-range"></div>
-                                            <div class="price_slider_amount">
-                                                <div class="label-input">
-                                                    <input type="text" id="amount" name="price"
-                                                        placeholder="Add Your Price" />
-                                                    <button type="submit">Filter</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="sidebar-widget">
-                            <div class="widget-title">
-                                <h3>Categories</h3>
-                            </div>
-                            <div class="widget-content widget-categories">
-                                <ul>
-                                    <li><a href="#">Fashions</a></li>
-                                    <li><a href="#">Electronics</a></li>
-                                    <li><a href="#">Home and Kitchen</a></li>
-                                    <li><a href="#">Baby and Toys</a></li>
-                                    <li><a href="#">Sports</a></li>
-                                    <li><a href="#">Digital Goods</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="sidebar-widget">
-                            <div class="widget-title">
-                                <h3>Brands</h3>
-                            </div>
-                            <div class="widget-content widget-brands">
-                                <ul>
-                                    <li><a href="#">Apple</a></li>
-                                    <li><a href="#">Samsung</a></li>
-                                    <li><a href="#">Lenovo</a></li>
-                                    <li><a href="#">Asus</a></li>
-                                    <li><a href="#">Xiaomi</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    <?php echo $this->include('themes/'. $currentTheme .'/shared/sidebar'); ?>
                 </div>
                 <div class="col-lg-9 col-md-8 col-12">
                     <div class="row">

@@ -18,7 +18,12 @@ class Products extends BaseController
         $this->productModel = new ProductModel();
         $this->categoryModel = new CategoryModel();
         $this->brandModel = new BrandModel();
-        $this->productImageModel = new ProductImageModel();   
+        $this->productImageModel = new ProductImageModel();  
+        
+        $categories = $this->categoryModel->getNestedCategories();
+
+        $this->data['categories'] = $categories;
+        $this->data['brands'] = $this->brandModel->findAll();
     }
 
     public function index()

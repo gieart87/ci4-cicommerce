@@ -65,4 +65,21 @@ class CategoryModel extends Model
 
 		return $categories;
 	}
+
+	public function getNestedCategories($level = 0)
+	{
+		$results = [];
+		$categories = $this->where('parent_id', $level)
+			->orderBy('name', 'asc')
+			->findAll();
+
+		if (count($categories) > 0) {
+			foreach ($categories as $key => $category) {
+				$results[$key] = $category->toArray();
+				$results[$key]['children'] = $this->getNestedCategories($category->id);
+			}
+		}
+
+		return $results;
+	}
 }

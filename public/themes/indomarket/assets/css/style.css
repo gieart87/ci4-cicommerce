@@ -368,15 +368,15 @@ Products Page
 }
 
 .sidebar .sidebar-widget .widget-categories ul, .sidebar .sidebar-widget .widget-brands ul {
-    padding: 0;
     margin: 0;
-    list-style: none;
+    list-style: circle;
     font-size: .9rem;
 }
 
 .sidebar .sidebar-widget .widget-categories ul li, .sidebar .sidebar-widget .widget-brands ul li {
     padding-top: 5px;
     padding-bottom: 5px;
+    margin-left: -20px;
 }
 
 .sidebar .sidebar-widget .widget-categories ul li a, .sidebar .sidebar-widget .widget-brands ul li a {

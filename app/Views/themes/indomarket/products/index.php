@@ -17,10 +17,10 @@
                                     </div>
                                     <div class="products-sort">
                                         <span>Sort By : </span>
-                                        <select>
-                                            <option>Default</option>
-                                            <option>Price</option>
-                                            <option>Recent</option>
+                                        <select name="order" onChange='this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);'>
+                                            <?php foreach ($ordering as $orderingKey => $orderingName): ?>
+                                                <option value="<?= $orderingKey ?>"><?= $orderingName ?></option>
+                                            <?php endforeach ?>
                                         </select>
                                     </div>
                                 </div>

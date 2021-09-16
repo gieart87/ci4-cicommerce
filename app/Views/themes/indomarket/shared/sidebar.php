@@ -4,7 +4,7 @@
             <h3>Shop by Price</h3>
         </div>
         <div class="widget-content shop-by-price">
-            <form method="GET" action="/tesas">
+            <form method="GET" action="<?= site_url('products') ?>">
                 <div class="price-filter">
                     <div class="price-filter-inner">
                         <div id="slider-range"></div>

@@ -24,12 +24,22 @@ class Products extends BaseController
 
         $this->data['categories'] = $categories;
         $this->data['brands'] = $this->brandModel->findAll();
+
+        $this->data['ordering'] = [
+			site_url('products') => 'Default',
+			site_url('products?order=price-asc') => 'Price - Low to High',
+			site_url('products?order=price-desc') => 'Price - High to Low',
+			site_url('products?order=created_at-desc') => 'Newest to Oldest',
+			site_url('products?order=created_at-asc') => 'Oldest to Newest',
+		];
+
+		$this->data['selectedOrder'] = site_url('products');
     }
 
     public function index()
     {
         $products = $this->productModel
-            ->select('products.*, categories.name as categoryName, categories.slug as categorySlug, brands.name as brandName, brands.slug as brandSlug')
+            ->select("products.*, categories.name as categoryName, categories.slug as categorySlug, brands.name as brandName, brands.slug as brandSlug, (SELECT MIN(price) FROM products AS variants WHERE (products.id = variants.id AND variants.type = 'simple') OR products.id = variants.parent_id LIMIT 1) price")
             ->join('product_categories', 'products.id = product_categories.product_id', 'left')
             ->join('categories', 'product_categories.category_id = categories.id', 'left')
             ->join('brands', 'products.brand_id = brands.id', 'left')
@@ -43,6 +53,23 @@ class Products extends BaseController
         if ($brandSlug = $this->request->getGet('brand')) {
             $products = $products->where('brands.slug', $brandSlug);
         }
+
+        if ($priceRange = $this->request->getGet('price')) {
+            $prices = explode('-', $priceRange);
+            $lowPrice = removeAllCharsExceptNumbers($prices[0]);
+            $highPrice = removeAllCharsExceptNumbers($prices[1]);
+
+            if ($lowPrice && $highPrice && ($lowPrice < $highPrice)) {
+                $products = $products->where("products.price >= $lowPrice AND products.price <= $highPrice OR exists(SELECT * FROM products AS variants WHERE products.id = variants.parent_id AND price >= $lowPrice AND price <= $highPrice)");
+            }
+        }
+
+        $orderField = 'created_at';
+        $orderType = 'desc';
+        if ($order = $this->request->getGet('order')) {
+            list($orderField, $orderType) = explode('-', $order);
+        }
+        $products = $products->orderBy($orderField, $orderType);
 
         $this->data['products'] = $products->paginate($this->perPage, 'bootstrap');
         $this->data['pager'] = $this->productModel->pager;

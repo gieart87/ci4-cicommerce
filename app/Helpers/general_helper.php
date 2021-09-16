@@ -86,3 +86,8 @@ function getMultiLevelOptions($array, $parent_id = 0, $parents = [], $selected =
     $i--;
     return $menu_html;
 }
+
+
+function removeAllCharsExceptNumbers($string) {
+    return preg_replace('/[^0-9]/', '', $string);
+}
